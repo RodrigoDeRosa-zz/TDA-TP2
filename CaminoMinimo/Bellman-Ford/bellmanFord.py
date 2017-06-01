@@ -52,11 +52,10 @@ class BellmanFord():
         path = [dest]
         parent = None #Padre de cada vertice
         vertex = dest #Vertice que va cambiando (para atras)
-        print (previous)
-        while (parent != None):
-            parent = previous[int(dest)]
+        while (parent != int(source)):
+            parent = previous[int(vertex)]
+            vertex = parent
             path.append(str(parent)) #Se guarda el vertice
-        path.append(source)
         #Se da vuelta la lista para que vaya src-dest y no dest-src
         path = list(reversed(path))
         #Peso del camino minimo

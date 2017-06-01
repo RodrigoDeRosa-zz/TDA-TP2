@@ -3,6 +3,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from lectorArchivos import LectorArchivos
 from bellmanFord import BellmanFord
 import time
+import math
 
 GRAFO1 = "../files/g1.txt"
 GRAFO2 = "../files/g2.txt"
@@ -41,6 +42,7 @@ def main():
         print "-----------------------------------------"
         print "Leyendo archivo " + str(i+1) + "..."
         grafo = lector.initGrafo(archivos[i])
+        modificarPesos(grafo) #Se modifican los pesos para el problema de las finanzas
 
         BF = BellmanFord(grafo)
 
@@ -55,5 +57,13 @@ def main():
         for vertex in path:
             print vertex,
         print "\n"
+
+def modificarPesos(grafo):
+    for vertice in grafo.vertices.keys():
+        #Para cada arista en E[G]
+        verticesAdyacentes = grafo.obtener_conocidos(vertice) #Vecinos de vertex
+        for adyacente in verticesAdyacentes:
+            peso = float(grafo.obtener_peso(vertice, adyacente))
+            grafo.vertices[vertice][adyacente] = str(-math.log(float(peso)))
 
 main()
