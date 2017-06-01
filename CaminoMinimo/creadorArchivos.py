@@ -40,9 +40,14 @@ class CreadorArchivos(object):
                 peso = cambio[i][j]
                 if peso is None:
                     nuevoPeso = random.randint(1, MAX_PESO)
-                    cambio[i][j] = nuevoPeso
-                    cambio[j][i] = 1.0/nuevoPeso
-                    peso = nuevoPeso
+                    if (random.randint(1, 10) > 5):
+                        cambio[i][j] = nuevoPeso
+                        cambio[j][i] = 1.0/nuevoPeso
+                        peso = nuevoPeso
+                    else:
+                        cambio[j][i] = nuevoPeso
+                        cambio[i][j] = 1.0/nuevoPeso
+                        peso = 1.0/nuevoPeso
                 arista.append(str(peso)) #Peso
                 linea = " ".join(arista)
                 archivo.write(linea + "\n")
