@@ -30,12 +30,19 @@ class CreadorArchivos(object):
         archivo.close()
 
     def agregarAristas(self, n, archivo):
+        cambio = dict( (e, dict( (a, None) for a in xrange(n))) for e in xrange(n))
         for i in xrange(0, n): #Para cada vertice
             for j in xrange(0, n): #Se agregan las n-1 aristas
                 arista = []
                 if j == i: continue #No esta unido consigo mismo
                 arista.append(str(i)) #Vertice actual
                 arista.append(str(j)) #Vertice siguiente
-                arista.append(str(random.randint(1, MAX_PESO))) #Peso
+                peso = cambio[i][j]
+                if peso is None:
+                    nuevoPeso = random.randint(1, MAX_PESO)
+                    cambio[i][j] = nuevoPeso
+                    cambio[j][i] = 1.0/nuevoPeso
+                    peso = nuevoPeso
+                arista.append(str(peso)) #Peso
                 linea = " ".join(arista)
                 archivo.write(linea + "\n")
