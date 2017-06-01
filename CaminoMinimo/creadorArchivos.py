@@ -1,7 +1,7 @@
 import random
 
 TEST_FILE = "files/test.txt"
-MAX_PESO = 4
+MAX_PESO = 10
 
 class CreadorArchivos(object):
     """
