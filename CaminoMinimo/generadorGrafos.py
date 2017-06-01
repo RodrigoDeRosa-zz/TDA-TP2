@@ -16,9 +16,9 @@ FILE_11 = "files/g12.txt"
 
 def main():
     creador = CreadorArchivos()
-    creador.crearArchivo(10, FILE_1);
-    creador.crearArchivo(100, FILE_2);
-    creador.crearArchivo(500, FILE_3);
+    creador.crearArchivo(3, FILE_1);
+    #creador.crearArchivo(100, FILE_2);
+    #creador.crearArchivo(500, FILE_3);
     #creador.crearArchivo(1000, FILE_4);
     #creador.crearArchivo(3500, FILE_5);
     #creador.crearArchivo(5000, FILE_6);

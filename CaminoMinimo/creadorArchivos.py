@@ -1,7 +1,7 @@
 import random
 
 TEST_FILE = "files/test.txt"
-MAX_PESO = 10
+MAX_PESO = 2.00
 
 class CreadorArchivos(object):
     """
@@ -39,15 +39,17 @@ class CreadorArchivos(object):
                 arista.append(str(j)) #Vertice siguiente
                 peso = cambio[i][j]
                 if peso is None:
-                    nuevoPeso = random.randint(1, MAX_PESO)
+                    nuevoPeso = random.uniform(0.05, MAX_PESO)
+                    nuevoPeso = int(nuevoPeso*1000)/1000.0 #3 decimales
+                    extraSpice = int(random.uniform(-0.04, 0.04)*1000)/1000.0
                     if (random.randint(1, 10) > 5):
                         cambio[i][j] = nuevoPeso
-                        cambio[j][i] = 1.0/nuevoPeso
+                        cambio[j][i] = MAX_PESO-nuevoPeso+extraSpice
                         peso = nuevoPeso
                     else:
                         cambio[j][i] = nuevoPeso
-                        cambio[i][j] = 1.0/nuevoPeso
-                        peso = 1.0/nuevoPeso
+                        cambio[i][j] = MAX_PESO-nuevoPeso+extraSpice
+                        peso = MAX_PESO-nuevoPeso+extraSpice
                 arista.append(str(peso)) #Peso
                 linea = " ".join(arista)
                 archivo.write(linea + "\n")
