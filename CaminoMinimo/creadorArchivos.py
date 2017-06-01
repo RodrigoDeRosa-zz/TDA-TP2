@@ -1,7 +1,7 @@
 import random
 
 TEST_FILE = "files/test.txt"
-MAX_PESO = 2.00
+MAX_PESO = 20.00
 
 class CreadorArchivos(object):
     """
@@ -40,16 +40,15 @@ class CreadorArchivos(object):
                 peso = cambio[i][j]
                 if peso is None:
                     nuevoPeso = random.uniform(0.05, MAX_PESO)
-                    nuevoPeso = int(nuevoPeso*1000)/1000.0 #3 decimales
-                    extraSpice = int(random.uniform(-0.04, 0.04)*1000)/1000.0
+                    extraSpice = random.uniform(-0.005, 0.005) #cuarto decimal
                     if (random.randint(1, 10) > 5):
                         cambio[i][j] = nuevoPeso
-                        cambio[j][i] = MAX_PESO-nuevoPeso+extraSpice
+                        cambio[j][i] = 1.0/nuevoPeso + extraSpice
                         peso = nuevoPeso
                     else:
                         cambio[j][i] = nuevoPeso
-                        cambio[i][j] = MAX_PESO-nuevoPeso+extraSpice
-                        peso = MAX_PESO-nuevoPeso+extraSpice
-                arista.append(str(peso)) #Peso
+                        cambio[i][j] = 1.0/nuevoPeso + extraSpice
+                        peso = 1.0/nuevoPeso + extraSpice
+                arista.append(str(int(peso*1000)/1000.0)) #Peso
                 linea = " ".join(arista)
                 archivo.write(linea + "\n")
