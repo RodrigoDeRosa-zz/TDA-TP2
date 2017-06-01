@@ -35,6 +35,6 @@ class LectorArchivos(object):
             vertices[2] = vertices[2][:len(vertices[2])-1] #Se saca el \n del peso
             for i in xrange(0, 2):
                 grafo.aniadir_vertice(vertices[i], None) #Se guardan los dos vertices
-            grafo.unir_vertices(vertices[0], vertices[1], vertice[2])
+            grafo.unir_vertices(vertices[0], vertices[1], vertices[2])
 
         return grafo

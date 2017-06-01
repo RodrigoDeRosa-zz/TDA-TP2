@@ -12,7 +12,7 @@ FILE_8 = "files/g8.txt"
 FILE_9 = "files/g9.txt"
 FILE_10 = "files/g10.txt"
 FILE_11 = "files/g11.txt"
-FILE_11 = "files/g12.txt"
+FILE_12 = "files/g12.txt"
 
 def main():
     creador = CreadorArchivos()
