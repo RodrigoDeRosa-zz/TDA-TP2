@@ -1,4 +1,3 @@
-#from iteradores_grafo import Bfs_iter
 import heapq
 VALOR_INALCANZABLE = 1000000000.0
 
