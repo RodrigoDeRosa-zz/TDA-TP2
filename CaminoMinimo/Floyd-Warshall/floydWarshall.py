@@ -22,8 +22,10 @@ class floydWarshall():
         numV = len(self.grafo)
 
         for k in xrange(numV):
-            for i in xrange(1,numV):
-                for j in xrange(2,numV):
+            #aca puede arrancar en 1
+            for i in xrange(numV):
+                #aca puede arrancar en 2
+                for j in xrange(numV):
 
                     auxK = str(k)
                     auxI = str(i)

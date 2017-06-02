@@ -22,8 +22,8 @@ GRAFO12 = "../files/g12.txt"
 def main():
 
     lector = LectorArchivos()
-    archivos = [GRAFO1]  #, GRAFO2, GRAFO3, GRAFO4, GRAFO5, GRAFO6]
-    vertices = [3]#, 100, 500, 1000, 3500, 5000, 7500, 10000, 35000, 50000, 75000, 100000]
+    archivos = [GRAFO1, GRAFO2] #, GRAFO3, GRAFO4, GRAFO5, GRAFO6]
+    vertices = [3, 100]#, 500, 1000, 3500, 5000, 7500, 10000, 35000, 50000, 75000, 100000]
 
     src = raw_input("Vertice origen: ")
     dest = raw_input("Vertice destino: ")
