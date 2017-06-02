@@ -8,7 +8,7 @@ class LectorArchivos(object):
     def __init__(self):
         pass
 
-    def initGrafo(self, filePath, digraph = False):
+    def initGrafo(self, filePath):
         """
         Crea el grafo para la prueba a partir del archivo que esta en el path indicado.
             - filePath {string} Direccion del archivo.
@@ -18,7 +18,7 @@ class LectorArchivos(object):
             #3...#n - Vi Vj <--- Vertices que estan unidos, indicados por numeros separados
                                 por un espacio
         """
-        grafo = Graph(digraph)
+        grafo = Graph(True)
 
         try:
             archivo = open(filePath, "r")
