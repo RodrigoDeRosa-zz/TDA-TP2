@@ -25,6 +25,7 @@ class BellmanFord():
 
         #Se relajan las aristas
         for i in xrange(len(self.graph)):
+            modified = False #Flag para terminar la iteracion cuando ya no haya modificaciones
             for vertex in self.graph.vertices.keys():
                 #Para cada arista en E[G]
                 vertexAdj = self.graph.obtener_conocidos(vertex) #Vecinos de vertex
@@ -34,8 +35,11 @@ class BellmanFord():
                     v = int(adjacent)
                     #Si hay un camino mas corto, se actualiza
                     if distance[v] > distance[u] + edgeWeight:
+                        modified = True
                         distance[v] = distance[u] + edgeWeight #nuevo peso
                         previous[v] = u #nuevo padre
+            if not modified:
+                break
 
         return (distance, previous)
 
@@ -50,12 +54,10 @@ class BellmanFord():
 
         #El camino empieza con dest
         path = [dest]
-        parent = None #Padre de cada vertice
         vertex = dest #Vertice que va cambiando (para atras)
-        while (parent != int(source)):
-            parent = previous[int(vertex)]
-            vertex = parent
-            path.append(str(parent)) #Se guarda el vertice
+        while (vertex != int(source) and vertex != None):
+            vertex = previous[int(vertex)]
+            path.append(str(vertex)) #Se guarda el vertice
         #Se da vuelta la lista para que vaya src-dest y no dest-src
         path = list(reversed(path))
         #Peso del camino minimo

@@ -16,17 +16,17 @@ FILE_12 = "files/g12.txt"
 
 def main():
     creador = CreadorArchivos()
-    creador.crearArchivo(3, FILE_1);
-    #creador.crearArchivo(100, FILE_2);
-    #creador.crearArchivo(500, FILE_3);
-    #creador.crearArchivo(1000, FILE_4);
-    #creador.crearArchivo(3500, FILE_5);
-    #creador.crearArchivo(5000, FILE_6);
-    #creador.crearArchivo(7500, FILE_7);
-    #creador.crearArchivo(10000, FILE_8);
-    #creador.crearArchivo(35000, FILE_9);
-    #creador.crearArchivo(50000, FILE_10);
-    #creador.crearArchivo(75000, FILE_11);
-    #creador.crearArchivo(100000, FILE_12);
+    creador.crearArchivo(10, FILE_1);
+    creador.crearArchivo(50, FILE_2);
+    creador.crearArchivo(100, FILE_3);
+    creador.crearArchivo(350, FILE_4);
+    creador.crearArchivo(500, FILE_5);
+    creador.crearArchivo(750, FILE_6);
+    creador.crearArchivo(1000, FILE_7);
+    creador.crearArchivo(1250, FILE_8);
+    creador.crearArchivo(1500, FILE_9);
+    creador.crearArchivo(1750, FILE_10);
+    creador.crearArchivo(2000, FILE_11);
+    creador.crearArchivo(2500, FILE_12);
 
 main();
