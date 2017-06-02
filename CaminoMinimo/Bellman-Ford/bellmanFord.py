@@ -38,7 +38,7 @@ class BellmanFord():
                         modified = True
                         distance[v] = distance[u] + edgeWeight #nuevo peso
                         previous[v] = u #nuevo padre
-            if not modified:
+            if not modified: #Si en esta iteracion no hubo mejoras, se termina la ejecucion
                 break
 
         return (distance, previous)
