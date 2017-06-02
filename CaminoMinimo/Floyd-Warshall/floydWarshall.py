@@ -22,25 +22,22 @@ class floydWarshall():
         numV = len(self.grafo)
 
         for k in xrange(numV):
-            for i in xrange(numV):
-                for j in xrange(numV):
+            for i in xrange(1,numV):
+                for j in xrange(2,numV):
 
                     auxK = str(k)
                     auxI = str(i)
                     auxJ = str(j)
 
-                    #Temporal hasta encontrar el problema
-                    if(not self.dist.has_key(auxI) or not self.dist.has_key(auxK) or not self.dist.has_key(auxJ) ):
-                        print("alto gato \n")
-                        continue
-                    elif(not self.dist[auxI].has_key(auxK) or not self.dist[auxK].has_key(auxJ) or not self.dist[auxI].has_key(auxJ) ):
+                    if(not self.dist[auxI].has_key(auxK) or not self.dist[auxK].has_key(auxJ) or not self.dist[auxI].has_key(auxJ) ):
                         continue
 
-                    distAux = (self.dist[auxI][auxK] + self.dist[auxK][auxJ])
+                    distAux = float(self.dist[auxI][auxK]) + float(self.dist[auxK][auxJ])
 
-                    if(self.dist[auxI][auxJ] > distAux ):
-                        self.dist[auxI][auxJ] = distAux
+                    if(float(self.dist[auxI][auxJ]) > distAux ):
+                        self.dist[auxI][auxJ] = str(distAux)
+
 
 
     def calculoDeCaminoMinimo(self, src, dst):
-        return self.dist[dst][src]
+        return self.dist[src][dst]

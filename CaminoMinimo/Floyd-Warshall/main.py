@@ -1,7 +1,7 @@
 import os, sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from lectorArchivos import LectorArchivos
-from creadorArchivos import CreadorArchivos
+
 from floydWarshall import floydWarshall
 import time
 import math
@@ -32,6 +32,7 @@ def main():
     for i in xrange(len(archivos)):
         print "-----------------------------------------"
         print "Leyendo archivo " + str(i+1) + "..."
+
         grafo = lector.initGrafo(archivos[i])
 
         fw= floydWarshall(grafo)

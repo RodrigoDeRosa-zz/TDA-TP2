@@ -54,7 +54,7 @@ def modificarPesos(grafo):
         verticesAdyacentes = grafo.obtener_conocidos(vertice) #Vecinos de vertex
         for adyacente in verticesAdyacentes:
             peso = float(grafo.obtener_peso(vertice, adyacente))
-            grafo.vertices[vertice][adyacente] = str(-math.log(float(peso)))        
+            grafo.vertices[vertice][adyacente] = str(-math.log(float(peso)))
 
 
 main()
