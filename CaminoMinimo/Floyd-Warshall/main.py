@@ -26,11 +26,14 @@ def main():
     archivos = [GRAFO1, GRAFO2]#, GRAFO3, GRAFO4, GRAFO5, GRAFO6]
     vertices = [3, 100]#, 500, 1000, 3500, 5000, 7500, 10000, 35000, 50000, 75000, 100000]
 
-    src = raw_input("Vertice origen: ")
-    dest = raw_input("Vertice destino: ")
 
     for i in xrange(len(archivos)):
+
         print "-----------------------------------------"
+
+        src = raw_input("Vertice origen: ")
+        dest = raw_input("Vertice destino: ")
+
         print "Leyendo archivo " + str(i+1) + "..."
 
         grafo = lector.initGrafo(archivos[i])
@@ -41,12 +44,19 @@ def main():
         print "Calculando camino minimo en grafo con " + str(n) + " vertices y " + str(n*(n-1)) + " aristas..."
         init = time.time()
         fw.floydWarshall()
-        peso = fw.calculoDeCaminoMinimo(src,dest)
+        peso, intermedios= fw.calculoDeCaminoMinimo(src,dest)
         end = time.time()
 
         print "Tiempo transcurrido: " + str(end-init) + "s."
 
-        print "El camino minimo entre " + src + " y " + dest + " tiene un peso de " + str(peso)
+        print "El camino minimo entre " + src + " y " + dest + " tiene un peso de " + str(peso) + " pasando por: \n"
+        cam = src
+        cam += " "
+        for vertex in intermedios:
+            cam += vertex
+            cam += " "
+        cam+= dest
+        print cam
 
 
 def modificarPesos(grafo):
