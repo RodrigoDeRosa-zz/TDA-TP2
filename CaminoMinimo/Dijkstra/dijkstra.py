@@ -23,17 +23,16 @@ class Dijkstra():
 
 		padres, visitados, distancias = self.getListasIniciadas()
 
+
 		distancias[src] = 0
-		heapq.heappush(colaP, src)
-
-
-		print(float(self.grafo.obtener_peso("0", "1")))
+		heapq.heappush(colaP, (distancias[src], src))
 
 
 		#Mientras que la cola de prioridad no este vacia
 		while (len(colaP) > 0):
 			
-			vertice = heapq.heappop(colaP) #devuelve el minimo elemento
+			menor = heapq.heappop(colaP) #devuelve el minimo elemento
+			vertice = menor[1]
 			visitados[vertice] = True
 			
 			for vertVecino in self.grafo.obtener_conocidos(str(vertice)):
@@ -41,10 +40,11 @@ class Dijkstra():
 				vecino = int(vertVecino); 
 
 				pesoEntreEllos = float(self.grafo.obtener_peso(str(vertice), vertVecino))
-				if( (not visitados[vecino]) and (distancias[vecino] > (distancias[vertice] + pesoEntreEllos) ) ):
+				#si saco el chequeo de visitados anda barbaro, si no falla
+				if( (visitados[vecino] is False) and (distancias[vecino] > (distancias[vertice] + pesoEntreEllos) ) ):
 					distancias[vecino] = distancias[vertice] + pesoEntreEllos
 					padres[vecino] = vertice
-					heapq.heappush(colaP, vecino)
+					heapq.heappush(colaP, (distancias[vecino], vecino))
 
 		return self.calculoDeCaminoMinimo(src, dst, padres), distancias[dst]
 
