@@ -3,7 +3,6 @@
 \usepackage{geometry}
 \usepackage{graphicx}
 \usepackage{listings}
-
 \usepackage{amsfonts}
 \newcommand{\Z}{\mathbb{Z}}
 
@@ -90,7 +89,44 @@ Funcion seleccionar_actividades ( ListaAct )
         \item \textbf{En teoría de grafos, un camino hamiltoniano es un camino que visita cada vértice del grafo exactamente
             una vez. Se pide un algoritmo que indique si un grafo G tiene un camino hamiltoniano o no.} %\\
 
-            %TODO
+            \tab Richard Karp fue un informático teórico que desarrolló en 1972 una lista con 21 problemas $NP-Completos$.
+            Dentro de esta lista, se encuentran:
+            \begin{itemize}
+              \item El problema del circuito Hamiltoniano Dirigido
+              \item El problema del circuito Hamiltoniano NO Dirigido
+            \end{itemize}
+
+            \tab A partir de tener estos conocimientos, se procede a reducir el problema en cuestión a uno de ellos, es decir,
+             reducir el problema de un camino hamiltoniano al de un circuito. Para demostrar que el problema de encontrar un
+             camino hamiltoniano es $NP-Completo$, primero se debe mostrar que pertenece a la clase $NP$.
+
+             \tab Para un G dado se puede encontrar un camino hamiltoniano de manera no determinista, eligiendo aristas de G que son
+             incluidas en el camino. Luego se recorre el camino y se asegura de que cada vértice es visitado exactamente una vez.
+             Esto claramente se puede realizar en tiempo polinómico por lo tanto el problema en sí pertenece a $NP$.
+
+             \tab Sabiendo que pertenece a $NP$, se procede a realizar la reducción a un “Circuito Hamiltoniano No Dirigido” siendo un
+             circuito (en este caso) un camino hamiltoniano que empieza y termina en el mismo vértice. A partir de un grafo
+             G=(V,E) se construye un grafo G’ tal que G contiene un ciclo hamiltoniano si y sólo si  G’ contiene un ciclo hamiltoniano.
+             Esto se realiza eligiendo arbitrariamente un vértice u (perteneciente a G) y a la vez añadiendo u’ (perteneciente a G’)
+             con todas sus aristas. A continuación se añaden los vértices v y v’ al grafo G’ y se conecta por un lado v con u, y por otro v’
+             con u’ como muestra la siguiente figura:
+
+             \begin{center}
+                 \includegraphics[width=9cm, height=5cm]{images/p3}
+             \end{center}
+
+             \tab Supongamos primero que G contiene un ciclo hamiltoniano. Entonces se obtiene un ciclo hamiltoniano en G’ si se arranca por v,
+             se continúa el ciclo que se obtuvo de G retornando a u’ en vez de u  y terminando el camino en v’. Por ejemplo, al observar la
+             figura se puede apreciar que G tiene un ciclo hamiltoniano 1, 2, 5, 6, 4, 3, 1; por consiguiente el camino de G’ corresponde
+             a v, 1, 2, 5, 6, 4, 3, 1’ , v’.
+
+             \tab Inversamente, supongamos que G’ contiene un camino hamiltoniano. En ese caso, el camino necesariamente tiene que tener sus
+             extremos en v y v’. Este camino puede ser transformado a un ciclo en G. Si se descartan v y v’ entonces los extremos del camino
+             deben estar en u y u’ y si se remueve u’ se obtiene un ciclo en G cerrando el camino anterior en u en vez de u’.
+
+             \tab Esta construcción no funcionaria si G es un grafo simple, por lo tanto este caso tiene que ser manejado por separado. En conclusión,
+             se ha demostrado que G contiene un ciclo hamiltoniano si y sólo si G’ contiene un camino hamiltoniano, probando así que el problema en
+             cuestión es $NP-Completo$.
 
         \item \textbf{En teoría de grafos, un camino hamiltoniano es un camino que visita cada vértice del grafo exactamente
             una vez. Se pide un algoritmo que indique si un digrafo acíclico D tiene un camino hamiltoniano o no.} %\\
