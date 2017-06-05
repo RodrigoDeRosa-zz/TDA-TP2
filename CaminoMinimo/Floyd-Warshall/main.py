@@ -23,8 +23,8 @@ GRAFO12 = "../files/g12.txt"
 def main():
 
     lector = LectorArchivos()
-    archivos = [GRAFO1, GRAFO2]#, GRAFO3, GRAFO4, GRAFO5, GRAFO6]
-    vertices = [3, 100]#, 500, 1000, 3500, 5000, 7500, 10000, 35000, 50000, 75000, 100000]
+    archivos = [GRAFO1, GRAFO2, GRAFO3, GRAFO4, GRAFO5, GRAFO6, GRAFO7, GRAFO8, GRAFO9, GRAFO10, GRAFO11, GRAFO12]
+    vertices = [10, 50, 100, 350, 500, 750, 1000, 1250, 1500, 1750, 2000, 2500]
 
 
     for i in xrange(len(archivos)):

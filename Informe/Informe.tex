@@ -154,7 +154,10 @@ BellmanFord(Grafo, verticeInicial):
             \subsubsection{Floyd-Warshall}
             \tab Este algoritmo resuelve el \emph{all-pairs shortest path problem}, es decir, hallar los
             caminos mínimos entre todos los pares de vértices del grafo. \\
-            \tab Utiliza la técnica de la Programación Dinámica y se basa en \\ %TODO QUE MIERDA HACE ESTE ALGORITMO???
+            \tab Utiliza la técnica de la Programación Dinámica y se basa en que cada iteracion se mejora
+            el camino minimo entre dos vertices, hasta llegar al menor de todos. Este algoritmo trabaja
+            directamente con la matriz de adyacencia del grafo y para cada ciudad i, busca el camino
+            mínimo hasta la ciudad j suponiendo que solo se puede pasar por las ciudades desde 0 a k-1.\\ %TODO
             \tab Tiene un tiempo asintótico de $O(|V|^3)$ pero si bien es el más lento de los tres
             algoritmos analizados permite, una vez que se ejecuta, adquirir el camino mínimo entre cualquier
             par de vértices del grafo en $O(1)$. Además, si bien se supone que el grafo no tiene ciclos negativos,
@@ -163,7 +166,7 @@ BellmanFord(Grafo, verticeInicial):
             \subsubsection{Bellman-Ford}
             \tab Utiliza la técnica de la Programación Dinámica para resolver el \emph{single-source shortest-path problem}.
             \tab El algoritmo se basa en repetir $|V| - 1$ veces el proceso de relajación de aristas para
-            las $|E|$ aristas del grafo. Una vez realizado esto, se relajan las $|E|$ aristas una vez mas.
+            las $|E|$ aristas del grafo. Una vez realizado esto, se relajan la|s $|E|$ aristas una vez mas.
             Si se obtiene un mejor resultado que antes, entonces el grafo tiene ciclos negativos. \\
             \tab El tiempo asintótico de este algoritmo es, entonces, $O(|V||E|)$, que es más lento que Dijkstra
             pero permite detectar ciclos negativos.
