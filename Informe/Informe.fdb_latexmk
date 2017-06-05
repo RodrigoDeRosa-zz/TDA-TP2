@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1496668638 "Informe.tex" "/home/facundo/Desarrollo/TDA-TP2/Informe/Informe.pdf" "Informe" 1496668703
+["pdflatex"] 1496675059 "Informe.tex" "/home/facundo/Desarrollo/TDA-TP2/Informe/Informe.pdf" "Informe" 1496675061
   "/etc/texmf/web2c/texmf.cnf" 1492978791 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/facundo/Desarrollo/TDA-TP2/Informe/Informe.aux" 1496668157 1135 6b84e2c57bf199de9944249d5103e5e5 ""
   "/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty" 1284331290 1458 43ab4710dc82f3edeabecd0d099626b2 ""
@@ -24,14 +24,14 @@
   "/usr/share/texlive/texmf-dist/web2c/texmf.cnf" 1488610416 31340 0f53f8665296bf8fe6c697f9505e31d8 ""
   "/usr/share/texmf/web2c/texmf.cnf" 1488610416 31340 0f53f8665296bf8fe6c697f9505e31d8 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1492978814 719476 a7b64b1391910c7e7aa269fe5d972235 ""
-  "Informe.tex" 1496668543 15858 4085392112d7b17fd605aad148b78883 ""
+  "Informe.tex" 1496675053 16205 3db9521d6036165cf755e70c284f320e ""
   "listings.sty" 0 -1 0 ""
   (generated)
-  "Informe.toc"
-  "Informe.aux"
   "/home/rodrigo/Escritorio/FIUBA/Teoria de Algoritmos/TDA-TP2/Informe/Informe.pdf"
-  "/home/facundo/Desarrollo/TDA-TP2/Informe/Informe.pdf"
-  "Informe.log"
   "/home/facundo/Desarrollo/TDA-TP2/Informe/Informe.log"
+  "Informe.toc"
   "Informe.pdf"
+  "Informe.log"
+  "/home/facundo/Desarrollo/TDA-TP2/Informe/Informe.pdf"
   "/home/rodrigo/Escritorio/FIUBA/Teoria de Algoritmos/TDA-TP2/Informe/Informe.log"
+  "Informe.aux"
