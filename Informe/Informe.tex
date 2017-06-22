@@ -32,27 +32,27 @@
             inicio y tiempo de fin. Se dice que un conjunto de actividades es compatible si no hay dos que se
             superpongan en un tiempo. Se pide un algoritmo que devuelva verdadero o falso de acuerdo a si se
             puede encontrar un subconjunto compatible de tamaño k o superior.} %\\
-            \tab Este problema pertenece a $P$, pues puede ser resuelto de la siguiente manera: %\\
-            \begin{lstlisting}
-Funcion seleccionar_actividades ( ListaAct )
-    actTiempoFin = ordenar segun tiempos de fin ( ListaAct )
 
+            \tab Este problema pertenece a $P$, pues puede ser resuelto de la siguiente manera: %\\
+
+            \begin{lstlisting}
+Funcion seleccionar_actividades ( ListaAct ):
+    actTiempoFin = ordenar segun tiempos de fin ( ListaAct )
     k = 0
     #se agarran todas las actividades menos la primera y la ultima
     for i in xrange(1,  len(ListaAct)-1 ):
-    si la actTiempoFin[ i ].inicio > actTiempoFin[ k ].fin:
-        k=i
-    else:
-        return false
-
+        si la actTiempoFin[ i ].inicio > actTiempoFin[ k ].fin:
+            k=i
+        else:
+            return false
     return true
             \end{lstlisting}
 
             \tab El algoritmo ordena las actividades en base al tiempo de finalización y luego se recorren $n-2$
-            actividades verificando la compatibilidad.
+            actividades verificando la compatibilidad.\\
             \tab Para que este algoritmo funcione en tiempo polinomial la lista de actividades debe ordenarse
             de manera eficiente. Por ejemplo, utilizando MergeSort que es, en su peor caso $O(n Log(n))$, siendo
-            $n$ la cantidad de elementos.
+            $n$ la cantidad de elementos.\\
             \tab Suponiendo que esto sea así, el ordenamiento será $O(n Log(n))$ y el ciclo subsiguiente $O(n)$,
             resultando el algoritmo $O(n Log(n))$ y, por lo tanto, perteneciente a $P$.
 
@@ -200,7 +200,7 @@ BellmanFord(Grafo, verticeInicial):
             devolver verdadero o falso de acuerdo a si el grafo tiene algún ciclo con exactamente igual a cero.} \\
             \tab Este problema es $NP-C$ y lo demostraremos reduciéndo el \emph{Subset Sum Problem (S)} a nuestro
             problema, que llamaremos $Z$. Demostrando así que $S \leq_{P} Z$. \\
-            \tab\tab Supongamos que tenemos un problema $S$ con una entrada $W = \{w_{1}, ..., w_{n}\} \subseteq \Z$
+            \tab Supongamos que tenemos un problema $S$ con una entrada $W = \{w_{1}, ..., w_{n}\} \subseteq \Z$
                 la cual es aceptada por $S$ si existe un $A\subseteq \Z$ tal que: $$\sum_{a \in A} a = 0$$.
                 \tab Lo que haremos es resolver el problema S a través del problema propuesto. Para esto,
                 construiremos un grafo $G = (V, E)$ con $2n$ vertices de la siguiente manera:
@@ -224,7 +224,22 @@ BellmanFord(Grafo, verticeInicial):
             \tab\tab Dicho esto, si el algoritmo que resuelve $Z$ encuentra un ciclo de distancia $0$, entonces existe
             un subconjunto de $W$ que suma $0$. Por lo tanto $S \leq_{P} Z$ y entonces $Z \in NP-C$.
 
+            \tab Ahora procedemos a demostrar que existe un verificador $V \in P$ para el problema dado. Es decir,
+            existe un algoritmo de tiempo polinomial para determinar si un conjunto de aristas dado como supuesta
+            solución al problema (certificado) es efectivamente una solución o no. \\
+            \tab El siguiente algoritmo cumple con lo pedido:
 
+            \begin{lstlisting}
+funcion cicloCeroCorrecto( G, aristas ):
+    pesoTotal = 0
+    for arista in aristas:
+        pesoTotal += peso(arista)
+    if pesoTotal == 0: return true
+    else: return false
+            \end{lstlisting}
+
+            \tab Y el tiempo de este algoritmo es $O(|E|)$, con $G = (V, E)$. Por lo tanto, dada la existencia
+            de $V \in P$, se demuestra que $Z \in NP$.
     \end{enumerate}
 
     \newpage
