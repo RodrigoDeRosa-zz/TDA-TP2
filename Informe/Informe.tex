@@ -67,7 +67,7 @@ Funcion seleccionar_actividades(k):
             de manera eficiente. Por ejemplo, utilizando MergeSort que es, en su peor caso $O(n Log(n))$, siendo
             $n$ la cantidad de elementos.\\
             \tab Suponiendo que esto sea así, el ordenamiento será $O(n Log(n))$ y el ciclo subsiguiente $O(n)$,
-            resultando el algoritmo $O(n Log(n))$ y, por lo tanto, perteneciente a $P$.
+            resultando el algoritmo $O(n Log(n))$ y, por lo tanto, perteneciente a $P$.\\
             \tab Vale aclarar que se utiliza un heap como estructura auxiliar con el objetivo de obtener el maximo eficientemente.
 
         \item \textbf{Se tiene un conjunto de n actividades para seleccionar. Cada actividad tiene asociados un conjunto de
@@ -75,30 +75,68 @@ Funcion seleccionar_actividades(k):
             superpongan en un tiempo. Se pide un algoritmo que devuelva verdadero o falso de acuerdo a si se
             puede encontrar un subconjunto compatible de tamaño k o superior.} %\\
 
-            \tab Este problema pertenece a la familia de los $NP-C$ y esto se puede demostrar haciendo una reducción
-            del problema de \emph{k-Coloreo} de un Grafo (que llamaremos $K$), que es $NP-C$. Haciendo esto,
-            demostraremos que nuestro problema ($P$) verifica $K \leq_{P} P$.
+            \tab Este problema pertenece a la familia de los $NP$. Esto lo demostraremos reduciendo el
+            \emph{Independent Set Problem (ISP)} a nuestro problema, que llamaremos $K$, demostrando
+            así que $K \leq_{P} NP-C$ y luego mostrando que existe un verificador $V \in P$, por lo
+            que $K \leq_{P} NP$.
 
-            \tab\tab Supongamos que tenemos el grafo $G$:
+            \tab Empezamos por reducir $ISP$ a $K$:\\
+            \tab Dado un grafo $G$ y un número $k$ se quiere saber si es posible hallar un conjunto de tamaño $k$
+            de vértices no adyacentes en $G$. \\
+            \tab Suponiendo que conocieramos un algoritmo que solucione nuestro problema $K$, podemos 'mapear' $G$
+            de manera tal que sea posible crear un input para el algoritmo que resuelve $K$ y así saber si es posible
+            encontrar un conjunto de tamaño $k$ de vertices no adyacentes. \\
+            \tab Imaginemos que tenemos el siguiente grafo $G$:
+
             \begin{center}
-                \includegraphics[width=3cm, height=3cm]{images/Problema2}
+                \includegraphics[width=5cm, height=5cm]{images/p2init} %poner init
             \end{center}
-                \tab A partir de las incidencias de cada vértice $v_{i}$, es decir, sabiendo a que otros vertices $v_{j}$
-                es adyacente cada $v_{i}$ podemos saber qué vértices no deben repetir colores. \\
-                \tab Sabiendo esto, se puede generar un diccionario donde se guarda la información sobre que conjuntos
-                de vértices compartiran un intervalo con inicio $i_{k}$ y fin $f_{k}$, pues esos serán los vértices que no
-                serán compatibles. El diccionario tendría la forma
-                    $\{ [0, 1, 2] : [i_{0}, f_{0}], [1, 3] : [i_{1}, f_{1}], [2, 3] : [i_{2}, f_{2}] \}$
-                y se iría completando avanzando por el grafo y, para cada $v_{i}$, verificando si ya comparte un conjunto con
-                todos sus vecinos y en caso contrario, creando uno nuevo, con un nuevo intervalo. \\
-                \tab Una vez generado el diccionario, se procedería a identificar a cada $v_{i}$ como una actividad $a_{i}$
-                con los intervalos correspondientes. Esto resultaría en:
-                    $\{ 0 : [[i_{0}, f_{0}]], 1 : [[i_{0}, f_{0}], [i_{1}, f_{1}]], 2 : [[i_{0}, f_{0}], [i_{2}, f_{2}]],
-                    3 : [[i_{1}, f_{1}], [i_{2}, f_{2}]] \}$ \\
-                \tab Finalmente, y con cada vértice adaptado al modelo de actividades del problema original, podríamos
-                resolver el problema $K$ procesando nuestras nuevas actividades con el algoritmo
-                que resuelva el problema $P$ original, para un $k$ cualquiera. \\
-                \tab Por lo tanto, $K \leq_{P} P$ y, entonces, $P \in NP-C$.
+
+            \tab El primer paso es numerar a todas las aristas $e_{0}, ..., e_{i}, ..., e_{m-1}$ y asignarles un intervalo
+            $[i, i+1]$, como muestra la siguiente imagen:
+
+            \begin{center}
+                \includegraphics[width=5cm, height=5cm]{images/p2naming} %poner aristas numeradas
+            \end{center}
+
+            \tab Una vez hecho esto, a cada vértice $v_{i}$ se le asigna un conjunto de intervalos, que corresponde con
+            los intervalos de cada arista incidente en él, como se ve en esta figura:
+
+            \begin{center}
+                \includegraphics[width=5cm, height=5cm]{images/p2vertices} %poner conjuntos
+            \end{center}
+
+            \tab Una vez hecho esto, podemos considerar que los vértices son actividades y los conjuntos correspondientes
+            son los intervalos en los que se las puede realizar. Por lo tanto, esta información puede ser un input de
+            nuestro supuesto algoritmo resolvedor de $K$, que nos dirá si en ese set de datos existe o no un conjunto
+            de tamaño $k$ de actividades compatibles (o vértices independientes). Un ejemplo, con $k = 2$ de los posibles
+            conjuntos es:
+
+            \begin{center}
+                \includegraphics[width=5cm, height=5cm]{images/p2example} %poner conjuntos
+            \end{center}
+
+            \tab Entonces queda así demostrado que $ISP \leq_{P} K$, pues existe una manera de reducir el
+            \emph{Independent Set Problem} a nuestro problema $K$. Y de esta manera, mostramos que $K \in NP-C$.
+
+            \tab Ahora procedemos a demostrar que existe un verificador $V \in P$ que dada una supuesta solución
+            al problema planteado determina, en tiempo polinomial, si es correcta o no.\\
+            \tab El siguiente algoritmo cumple lo pedido:
+
+            \begin{lstlisting}
+funcion nonOverlappingActivities( actividades ):
+    for actividad1 in actividades:
+        for actividad2 in actividades:
+            if actividad1 == actividad2: continue
+            for intervalo1 in actividad1.intervalos:
+                for intervalo2 in actividad2.intervalos:
+                    if intervalo1.overlaps(intervalo2): return false
+    return true
+            \end{lstlisting}
+
+            \tab El tiempo de este algoritmo es $O(k^2p^2)$ con $k$ la cantidad de actividades y $p$ el tamaño
+            del conjunto de intervalos más grande de todos. Entonces, dado que $V \in P$, mostramos que
+            $K \in NP$.
 
         \item \textbf{En teoría de grafos, un camino hamiltoniano es un camino que visita cada vértice del grafo exactamente
             una vez. Se pide un algoritmo que indique si un grafo G tiene un camino hamiltoniano o no.} %\\
@@ -212,8 +250,10 @@ BellmanFord(Grafo, verticeInicial):
 
         \item \textbf{Se tiene un grafo dirigido y pesado G, cuyas aristas tienen pesos que pueden ser negativos. Se pide
             devolver verdadero o falso de acuerdo a si el grafo tiene algún ciclo con exactamente igual a cero.} \\
-            \tab Este problema es $NP-C$ y lo demostraremos reduciéndo el \emph{Subset Sum Problem (S)} a nuestro
-            problema, que llamaremos $Z$. Demostrando así que $S \leq_{P} Z$. \\
+            \tab Este problema es $NP$ y lo demostraremos primero reduciendo el \emph{Subset Sum Problem (S)} a nuestro
+            problema, que llamaremos $Z$ (demostrando así que $S \leq_{P} Z$ y por ende $Z \leq_{P} NP-C$), y luego mostrando
+            que existe un verificador $V \in P$ por lo que $Z \in NP$. \\
+            \tab Empezamos por reducir $S$ a $Z$.
             \tab Supongamos que tenemos un problema $S$ con una entrada $W = \{w_{1}, ..., w_{n}\} \subseteq \Z$
                 la cual es aceptada por $S$ si existe un $A\subseteq \Z$ tal que: $$\sum_{a \in A} a = 0$$.
                 \tab Lo que haremos es resolver el problema S a través del problema propuesto. Para esto,
