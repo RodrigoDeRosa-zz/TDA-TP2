@@ -36,25 +36,39 @@
             \tab Este problema pertenece a $P$, pues puede ser resuelto de la siguiente manera: %\\
 
             \begin{lstlisting}
-Funcion seleccionar_actividades ( ListaAct ):
-    actTiempoFin = ordenar segun tiempos de fin ( ListaAct )
-    k = 0
-    #se agarran todas las actividades menos la primera y la ultima
-    for i in xrange(1,  len(ListaAct)-1 ):
-        si la actTiempoFin[ i ].inicio > actTiempoFin[ k ].fin:
-            k=i
+Funcion verificar_compatibilidad ( ListaAct )
+    actTiempoFin = ordenar segun tiempos de fin ( ListaAct ):
+
+    j = 0
+    longitudSubconjuntos = []
+    #se agarran todas las actividades
+    for i in xrange(1,  len(ListaAct)):
+        si la actTiempoFin[ i ].inicio > actTiempoFin[ i-1 ].fin:
+            j = ++
         else:
-            return false
-    return true
+            heapq.(longitudSubconjuntos.append(j))
+            j=0
+
+    return longitudSubconjuntos
+
+
+Funcion seleccionar_actividades(k):
+    heap_finalizaciones = verificar_compatibilidad()
+    maxima_longitud_subconjunto = lista_finalizaciones.obtenerMaximo()
+
+    #si el maximo elemento no cumple, entonces ninguno cumple
+    return (maxima_longitud_subconjunto >= k)
             \end{lstlisting}
 
-            \tab El algoritmo ordena las actividades en base al tiempo de finalización y luego se recorren $n-2$
-            actividades verificando la compatibilidad.\\
+
+            \tab El algoritmo ordena las actividades en base al tiempo de finalización y luego se recorren $n-1$
+            actividades verificando la compatibilidad.
             \tab Para que este algoritmo funcione en tiempo polinomial la lista de actividades debe ordenarse
             de manera eficiente. Por ejemplo, utilizando MergeSort que es, en su peor caso $O(n Log(n))$, siendo
             $n$ la cantidad de elementos.\\
             \tab Suponiendo que esto sea así, el ordenamiento será $O(n Log(n))$ y el ciclo subsiguiente $O(n)$,
             resultando el algoritmo $O(n Log(n))$ y, por lo tanto, perteneciente a $P$.
+            \tab Vale aclarar que se utiliza un heap como estructura auxiliar con el objetivo de obtener el maximo eficientemente.
 
         \item \textbf{Se tiene un conjunto de n actividades para seleccionar. Cada actividad tiene asociados un conjunto de
             tiempos de inicio y fin. Se dice que un conjunto de actividades es compatible si no hay dos que se
